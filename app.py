@@ -1,17 +1,17 @@
-from flask import Flask, request
-import gpiozero
+from flask import Flask, jsonify
+from gpiozero import LED
 
 app = Flask(__name__)
 
-led = gpiozero.LED(18)
+led = LED(18)
 
 
 @app.route('/1')
 def onLed():
     led.on()    
-    return '<h1>On</h1>'
+    return jsonify(ledState=1)
 
 @app.route('/0')
 def offLed():
     led.off()    
-    return '<h1>Off</h1>'
+    return jsonify(ledState=0)
